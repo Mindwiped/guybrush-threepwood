@@ -82,16 +82,39 @@ Wait for each command to finish before typing the next.
 STEP 4 -- Add the app code
 =============================================================
 
-Make sure the file "guybrush-threepwood.jsx" is in your Downloads folder.
-Then run this command in Command Prompt:
+Make sure both files "guybrush-threepwood.jsx" and "update.js" are in your Downloads folder.
+Then run these commands in Command Prompt:
 
     copy %USERPROFILE%\Downloads\guybrush-threepwood.jsx %USERPROFILE%\Desktop\guybrush-threepwood\src\App.jsx
+
+    copy %USERPROFILE%\Downloads\update.js %USERPROFILE%\Desktop\guybrush-threepwood\update.js
 
 When it asks to overwrite, type Y and press Enter.
 
 
 =============================================================
-STEP 5 -- Launch the app
+STEP 5 -- Download the full MITRE ATT&CK database
+=============================================================
+
+This step downloads the complete MITRE ATT&CK Mobile dataset (~3-4 MB) from GitHub.
+It gives the app full descriptions for all techniques instead of just the built-in ones.
+
+Make sure you are in the project folder first:
+
+    cd %USERPROFILE%\Desktop\guybrush-threepwood
+
+Then run:
+
+    node update.js
+
+You will see a progress log ending with something like:
+  Done! MITRE ATT&CK Mobile v18.1 -- 120 techniques loaded.
+
+Wait for it to finish before moving on.
+
+
+=============================================================
+STEP 6 -- Launch the app
 =============================================================
 
 Type this and press Enter:
@@ -103,6 +126,7 @@ Now open your browser and go to this address:
     http://localhost:5173
 
 The app will appear.  Done!
+The stats bar at the top will show "DB Source: v18.x" confirming the full database is loaded.
 
 
 =============================================================
@@ -116,6 +140,23 @@ HOW TO USE THE APP
   SEE DETAILS          Click any node in the graph or any card
   ZOOM THE GRAPH       Scroll with mouse wheel
   PAN THE GRAPH        Click and drag on empty space
+  UPDATE DATABASE      If the UPDATE button appears, run: node update.js
+
+
+=============================================================
+HOW TO UPDATE THE MITRE ATT&CK DATABASE
+=============================================================
+
+When MITRE releases a new version, the app will show a pulsing UPDATE button
+in the top right corner. To update:
+
+1. Open Command Prompt
+2. Run these commands:
+
+    cd %USERPROFILE%\Desktop\guybrush-threepwood
+    node update.js
+
+3. Reload the browser when it finishes
 
 
 =============================================================
@@ -151,11 +192,17 @@ SOMETHING WENT WRONG?
   "Port 5173 already in use"           Close all Command Prompt windows
                                        and try again
 
-  "The system cannot find the file"    Check that guybrush-threepwood.jsx
-  when running the copy command        is actually in your Downloads folder
+  "The system cannot find the file"    Check that both files are in your
+  when running the copy commands       Downloads folder
 
   App loaded but JSON won't import     Make sure your file ends in .json
                                        and contains the "techniques" field
+
+  "node update.js" fails               Check your internet connection
+                                       and try again
+
+  DB Source still shows "built-in"     Make sure update.js is in the project
+                                       root folder and run node update.js again
 
 
 =============================================================
@@ -163,6 +210,6 @@ SOMETHING WENT WRONG?
 Built with React + D3 + Vite
 MITRE ATT&CK Mobile Framework
 
-=============================================================
-
 Your friendly neighbor Fish
+
+=============================================================
