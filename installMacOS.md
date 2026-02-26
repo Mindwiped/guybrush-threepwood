@@ -98,15 +98,35 @@ npm install d3
 
 ## STEP 6 — Add the app code
 Copy the file `guybrush-threepwood.jsx` into the project.
-Run this in Terminal (make sure the file is in your Downloads folder first):
+Run this in Terminal (make sure both files are in your Downloads folder first):
 
 ```
 cp ~/Downloads/guybrush-threepwood.jsx ~/Desktop/guybrush-threepwood/src/App.jsx
 ```
 
+Also copy the `update.js` script into the project root:
+
+```
+cp ~/Downloads/update.js ~/Desktop/guybrush-threepwood/update.js
+```
+
 ---
 
-## STEP 7 — Launch the app
+## STEP 7 — Download the full MITRE ATT&CK database
+This step downloads the complete MITRE ATT&CK Mobile dataset (~3-4 MB) from GitHub.
+It gives the app full descriptions for all techniques instead of just the built-in ones.
+
+```
+cd ~/Desktop/guybrush-threepwood
+node update.js
+```
+
+You will see a progress log in Terminal ending with something like:
+`🍺 Done! MITRE ATT&CK Mobile v18.1 — 120 techniques loaded.`
+
+---
+
+## STEP 8 — Launch the app
 ```
 npm run dev
 ```
@@ -118,6 +138,7 @@ http://localhost:5173
 ```
 
 The app will appear. 🎉
+The stats bar at the top will show **DB Source: v18.x** confirming the full database is loaded.
 
 ---
 
@@ -131,6 +152,21 @@ The app will appear. 🎉
 | **Search a technique** | Type in the search box (top right) |
 | **See technique details** | Click any node or card |
 | **Zoom / Pan the graph** | Scroll to zoom, click and drag to move |
+| **Update MITRE database** | If the ⬆ UPDATE button appears, run `node update.js` in Terminal |
+
+---
+
+## How to update the MITRE ATT&CK database
+When MITRE releases a new version of the framework, the app will show a pulsing
+**⬆ UPDATE vX.x** button in the top right corner. To update:
+
+1. Open Terminal
+2. Run:
+```
+cd ~/Desktop/guybrush-threepwood
+node update.js
+```
+3. Reload the browser when it finishes
 
 ---
 
@@ -156,7 +192,9 @@ npm run dev
 | `command not found: node` | Go back to Step 4 and install Node.js |
 | Browser shows blank page | Make sure `npm run dev` is still running in Terminal |
 | Port already in use | Close other Terminal windows and try again |
-| File not found when copying | Check that `guybrush-threepwood.jsx` is in your Downloads folder |
+| File not found when copying | Check that the files are in your Downloads folder |
+| `node update.js` fails | Check your internet connection and try again |
+| DB Source still shows "built-in" | Make sure `update.js` is in the project root and run `node update.js` again |
 
 ---
 
