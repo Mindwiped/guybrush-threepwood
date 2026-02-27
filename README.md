@@ -130,34 +130,3 @@ MIT — use it, fork it, improve it. Just don't use it to actually become a pira
 — and somewhere in between those two lines, a threat actor just moved laterally across your mobile fleet.
 
 **Stay frosty. Keep mapping.** 🍺
-=======
-Open your browser at http://localhost:5173 and set sail. ⚓
-
-Full step-by-step installation guides for Mac and Windows are included in the repo:
-README_MAC.md and README_WINDOWS.txt
-
-
-🗂️ Loading your own layer files
-The app accepts any .json file exported from the MITRE ATT&CK Navigator for the mobile-attack domain.
-Click the 📂 IMPORT JSON button in the top right corner, drop your file, and the visualization updates instantly. Files follow the naming convention LayerName_attack_matrix.json — the app extracts the layer name automatically.
-
-🔄 Keeping the database fresh
-When MITRE releases a new version of ATT&CK, the app will show a pulsing ⬆ UPDATE vX.x button in the header. To update:
-bashnode update.js
-Then reload the browser. That's it.
-
-🛠️ Built with
-
-React — UI framework
-D3.js — force graph visualization
-Vite — build tool
-MITRE ATT&CK STIX data — technique database
-
-
-📜 License
-MIT — use it, fork it, improve it. Just don't use it to actually become a pirate.
-
-"You fight like a dairy farmer."
-"How appropriate. You fight like a cow."
-— and somewhere in between those two lines, a threat actor just moved laterally across your mobile fleet.
-Stay frosty. Keep mapping. 🍺
