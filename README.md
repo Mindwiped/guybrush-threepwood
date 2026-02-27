@@ -1,4 +1,4 @@
-# ⚓ Guybrush Threepwood — Grog like MITRE Visualizer
+# ⚓ Guybrush Threepwood — Grog like MITRE Visualizer born for Lookout MES Intelligence Files
 
 > *"I'm selling these fine leather jackets."*
 > — Guybrush Threepwood, Mighty Pirate™ and now, apparently, Threat Intelligence Analyst
