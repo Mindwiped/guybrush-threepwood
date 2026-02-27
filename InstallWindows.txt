@@ -1,0 +1,215 @@
+Installation Guide for Windows -- idiot proof step by step guide (as I'm an idiot first)
+=============================================================
+
+
+WHAT IS THIS?
+--------------
+A visual tool to explore MITRE ATT&CK attack matrices for mobile devices (Android).
+You can load any .json layer file and navigate techniques, tactics, and risk levels interactively.
+
+
+WHAT YOU NEED BEFORE STARTING
+-------------------------------
+You only need ONE thing: Node.js.
+We will download and install it together in Step 1.
+
+
+=============================================================
+STEP 1 -- Download and Install Node.js
+=============================================================
+
+1. Open your browser (Edge, Chrome, Firefox -- any)
+2. Go to this address:  https://nodejs.org
+3. Click the big button that says "LTS" (it's the recommended version)
+4. A file called something like "node-v20.x.x-x64.msi" will download
+5. Open that file from your Downloads folder
+6. Click NEXT on every screen, leave all options as they are, then click INSTALL
+7. When it asks for permission, click YES
+8. Wait for it to finish, then click FINISH
+
+To verify it worked:
+- Press the Windows key on your keyboard
+- Type "cmd" and press Enter  (a black window will open -- that's Command Prompt)
+- Type this and press Enter:
+
+    node --version
+
+- You should see something like:  v20.x.x
+- Then type this and press Enter:
+
+    npm --version
+
+- You should see something like:  10.x.x
+
+If you see numbers, you are good. Move to Step 2.
+
+
+=============================================================
+STEP 2 -- Open Command Prompt
+=============================================================
+
+Command Prompt is the black window where you type commands.
+You may already have it open from Step 1. If not:
+
+1. Press the Windows key
+2. Type "cmd"
+3. Press Enter
+
+Leave this window open for the rest of the installation.
+
+
+=============================================================
+STEP 3 -- Create the project on your Desktop
+=============================================================
+
+Type each of these commands ONE AT A TIME, pressing Enter after each one.
+Wait for each command to finish before typing the next.
+
+    cd %USERPROFILE%\Desktop
+
+    npm create vite@latest guybrush-threepwood -- --template react
+
+    (If it asks "Ok to proceed? (y)" -- type y and press Enter)
+
+    cd guybrush-threepwood
+
+    npm install
+
+    npm install d3
+
+
+=============================================================
+STEP 4 -- Add the app code
+=============================================================
+
+Make sure both files "guybrush-threepwood.jsx" and "update.js" are in your Downloads folder.
+Then run these commands in Command Prompt:
+
+    copy %USERPROFILE%\Downloads\guybrush-threepwood.jsx %USERPROFILE%\Desktop\guybrush-threepwood\src\App.jsx
+
+    copy %USERPROFILE%\Downloads\update.js %USERPROFILE%\Desktop\guybrush-threepwood\update.js
+
+When it asks to overwrite, type Y and press Enter.
+
+
+=============================================================
+STEP 5 -- Download the full MITRE ATT&CK database
+=============================================================
+
+This step downloads the complete MITRE ATT&CK Mobile dataset (~3-4 MB) from GitHub.
+It gives the app full descriptions for all techniques instead of just the built-in ones.
+
+Make sure you are in the project folder first:
+
+    cd %USERPROFILE%\Desktop\guybrush-threepwood
+
+Then run:
+
+    node update.js
+
+You will see a progress log ending with something like:
+  Done! MITRE ATT&CK Mobile v18.1 -- 120 techniques loaded.
+
+Wait for it to finish before moving on.
+
+
+=============================================================
+STEP 6 -- Launch the app
+=============================================================
+
+Type this and press Enter:
+
+    npm run dev
+
+Now open your browser and go to this address:
+
+    http://localhost:5173
+
+The app will appear.  Done!
+The stats bar at the top will show "DB Source: v18.x" confirming the full database is loaded.
+
+
+=============================================================
+HOW TO USE THE APP
+=============================================================
+
+  IMPORT JSON FILE     Click the folder icon button top right (IMPORT JSON)
+  SWITCH VIEW          Click GRAPH / MATRIX / LIST buttons
+  FILTER BY TACTIC     Click any colored pill below the header bar
+  SEARCH A TECHNIQUE   Type in the search box (top right)
+  SEE DETAILS          Click any node in the graph or any card
+  ZOOM THE GRAPH       Scroll with mouse wheel
+  PAN THE GRAPH        Click and drag on empty space
+  UPDATE DATABASE      If the UPDATE button appears, run: node update.js
+
+
+=============================================================
+HOW TO UPDATE THE MITRE ATT&CK DATABASE
+=============================================================
+
+When MITRE releases a new version, the app will show a pulsing UPDATE button
+in the top right corner. To update:
+
+1. Open Command Prompt
+2. Run these commands:
+
+    cd %USERPROFILE%\Desktop\guybrush-threepwood
+    node update.js
+
+3. Reload the browser when it finishes
+
+
+=============================================================
+HOW TO OPEN THE APP NEXT TIME
+=============================================================
+
+Every time you want to use the app:
+
+1. Open Command Prompt (Windows key, type "cmd", press Enter)
+2. Type these two commands:
+
+    cd %USERPROFILE%\Desktop\guybrush-threepwood
+    npm run dev
+
+3. Go to  http://localhost:5173  in your browser
+4. When you are done, go back to Command Prompt and press Ctrl + C to stop it
+
+
+=============================================================
+SOMETHING WENT WRONG?
+=============================================================
+
+  PROBLEM                              SOLUTION
+  -------------------------------------------------------------------
+  "node is not recognized"             Go back to Step 1 and reinstall Node.js
+                                       Then close and reopen Command Prompt
+
+  "npm is not recognized"              Same as above -- reinstall Node.js
+
+  Browser shows a blank white page     Make sure "npm run dev" is still
+                                       running in Command Prompt
+
+  "Port 5173 already in use"           Close all Command Prompt windows
+                                       and try again
+
+  "The system cannot find the file"    Check that both files are in your
+  when running the copy commands       Downloads folder
+
+  App loaded but JSON won't import     Make sure your file ends in .json
+                                       and contains the "techniques" field
+
+  "node update.js" fails               Check your internet connection
+                                       and try again
+
+  DB Source still shows "built-in"     Make sure update.js is in the project
+                                       root folder and run node update.js again
+
+
+=============================================================
+
+Built with React + D3 + Vite
+MITRE ATT&CK Mobile Framework
+
+Your friendly neighbor Fish
+
+=============================================================
