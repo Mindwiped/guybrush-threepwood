@@ -88,8 +88,7 @@ function parseStix(stixBundle) {
     if (!extRef) return;
 
     const id = extRef.external_id;
-    // Skip subtechniques (T1234.001 format)
-    if (!id.match(/^T\d+$/)) return;
+    // Include both techniques (T1234) and subtechniques (T1234.001)
 
     const tactics = obj.kill_chain_phases
       ?.filter((p) => p.kill_chain_name === "mitre-mobile-attack")
