@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # ⚓ Guybrush Threepwood — Grog like MITRE Visualizer
 
 > *"I'm selling these fine leather jackets."*
