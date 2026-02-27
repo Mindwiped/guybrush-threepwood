@@ -212,4 +212,3 @@ MIT — use it, fork it, improve it. Just don't use it to actually become a pira
 "How appropriate. You fight like a cow."
 — and somewhere in between those two lines, a threat actor just moved laterally across your mobile fleet.
 Stay frosty. Keep mapping. 🍺
->>>>>>> 6ce809b8d7d70716b4ea370ee0eb94d89418193c
