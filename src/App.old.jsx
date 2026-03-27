@@ -301,7 +301,6 @@ function UpdateModal({ localVersion, latestVersion, onClose }) {
 // ── Main App ──────────────────────────────────────────────────────────────────
 export default function App() {
   const svgRef = useRef(null);
-  const graphContainerRef = useRef(null);
   const [rawData, setRawData] = useState(KARA_DEFAULT);
   const [layerName, setLayerName] = useState(KARA_DEFAULT.name);
   const [mitreDB, setMitreDB] = useState(MITRE_DB);
@@ -362,7 +361,7 @@ export default function App() {
   const domain = rawData.domain || "mobile-attack";
 
   // ── D3 graph ──────────────────────────────────────────────────────────────
-  const drawGraph = useCallback(() => {
+  useEffect(() => {
     if (view !== "graph") return;
     const el = svgRef.current;
     if (!el) return;
@@ -433,15 +432,6 @@ export default function App() {
     return () => { sim.stop(); d3.select(el.parentElement).select("div").remove(); };
   }, [view, filterTactic, rawData]);
 
-  useEffect(() => {
-    drawGraph();
-    const container = svgRef.current?.parentElement;
-    if (!container) return;
-    const ro = new ResizeObserver(() => drawGraph());
-    ro.observe(container);
-    return () => ro.disconnect();
-  }, [drawGraph]);
-
   function drag(sim) {
     return d3.drag()
       .on("start", (e, d) => { if (!e.active) sim.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; })
@@ -468,7 +458,7 @@ export default function App() {
   };
 
   return (
-    <div style={{ height: "100vh", background: "#080c14", color: "#e2e8f0", fontFamily: "'Space Mono', monospace", display: "flex", flexDirection: "column", overflow: "hidden" }}>
+    <div style={{ minHeight: "100vh", background: "#080c14", color: "#e2e8f0", fontFamily: "'Space Mono', monospace", display: "flex", flexDirection: "column" }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap');
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -573,7 +563,7 @@ export default function App() {
 
         {view === "graph" && (
           <div className="grid-bg" style={{ flex: 1, position: "relative" }}>
-            <svg ref={svgRef} style={{ width: "100%", height: "100%" }} />
+            <svg ref={svgRef} style={{ width: "100%", height: "100%", minHeight: 600 }} />
             <div style={{ position: "absolute", bottom: 16, left: 16, background: "#0a101ccc", border: "1px solid #1e293b", borderRadius: 10, padding: "12px 16px", backdropFilter: "blur(8px)" }}>
               <div style={{ fontSize: 10, color: "#475569", marginBottom: 8 }}>RISK LEVEL</div>
               {Object.entries(RISK_CONFIG).map(([k, v]) => (
